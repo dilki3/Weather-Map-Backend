@@ -1,52 +1,28 @@
-
-// index.js
 const express = require('express');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 const weatherRoutes = require('./routes/weatherRoutes');
-const { Pool } = require('pg'); // Import Pool from pg for PostgreSQL connection
-const { getWeatherData } = require('./controllers/weatherController'); 
-require('dotenv').config();// Import your weather controller
+const { Pool } = require('pg');
+require('dotenv').config();
+const axios = require('axios');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+app.use(cors());
+app.use(express.json());
 
-// PostgreSQL database configuration
+app.use('/weather', weatherRoutes);
+
+// Schedule weather data insertion or update every 5 minutes
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false
   }
-});
-
-// Function to insert weather data into the PostgreSQL database
-const insertWeatherData = async () => {
-  try {
-    const response = await getWeatherData(); // Fetch weather data
-    console.log('Weather data:', response); // Log weather data
-
-    const { temperature, humidity, airPressure } = response; // Destructure weather data
-
-    // Insert weather data into the database
-    const query = `
-      INSERT INTO weather_data (temperature, humidity, air_pressure, timestamp)
-      VALUES ($1, $2, $3, NOW())
-    `;
-    await pool.query(query, [temperature, humidity, airPressure]);
-    console.log('Weather data inserted into the database.');
-  } catch (error) {
-    console.error('Error inserting weather data into the database:', error);
-  }
-};
+});  
 
 
-// Schedule weather data insertion every 5 minutes
-setInterval(insertWeatherData, 5 * 60 * 1000);
-
-app.use(cors());
-app.use(express.json());
-
-app.use('/weather', weatherRoutes);
 
 app.listen(PORT, async () => {
   console.log(`Server is running on port ${PORT}`);
@@ -54,14 +30,15 @@ app.listen(PORT, async () => {
   // Test database connection
   try {
     const client = await pool.connect();
+    
+    
+    //getWeatherData()
     console.log('PostgreSQL connected successfully.');
     client.release();
   } catch (error) {
     console.error('Error connecting to PostgreSQL:', error);
   }
 });
-
-
 
 
 
