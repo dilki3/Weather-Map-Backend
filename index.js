@@ -1,15 +1,19 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const weatherRoutes = require('./routes/weatherRoutes');
+const weatherRoutes = require('./public/routes/weatherRoutes');
 const { Pool } = require('pg');
 require('dotenv').config();
 const axios = require('axios');
+const path = require('path')
+
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
+
+app.use(express.static(path.join(__dirname + "/public")))
 
 app.use('/weather', weatherRoutes);
 
