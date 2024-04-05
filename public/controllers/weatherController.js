@@ -64,6 +64,7 @@ const pool = new Pool({
     // Schedule to update weather data every 5 minutes
     setInterval(updateWeatherData, 5 * 60 * 1000);
 
+
 const getWeatherData = async (req, res) => {
     try {
         const client = await pool.connect();
@@ -93,4 +94,4 @@ const getWeatherData = async (req, res) => {
   };
 
 
-module.exports = { getWeatherData };
+module.exports = { getWeatherData , updateWeatherData};
