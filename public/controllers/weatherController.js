@@ -62,7 +62,7 @@ const pool = new Pool({
     updateWeatherData();
     
     // Schedule to update weather data every 5 minutes
-    setInterval(updateWeatherData, 5 * 60 * 1000);
+    //setInterval(updateWeatherData, 5 * 60 * 1000);
 
 
 const getWeatherData = async (req, res) => {
