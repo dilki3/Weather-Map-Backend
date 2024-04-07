@@ -9,7 +9,7 @@ const options = {
       version: '1.0.0', // Version of the API
       description: 'API to get weather data for cities', // Description of the API
     },
-    servers: [{ url: 'http://localhost:3001' }], // Base URL of the API
+    servers: [{ url: 'https://thawing-anchorage-20196-46b1dac992e1.herokuapp.com' }], // Base URL of the API
   },
   apis: ['./public/routes/weatherRoutes/*.js'], // Path to the routes files containing Swagger annotations
 };

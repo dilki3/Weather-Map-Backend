@@ -12,12 +12,12 @@ const pool = new Pool({
 
   const insertOrUpdateWeatherData = async (cityId, weatherData) => {
     try {
-      // Check if weather data already exists for the city
+      
       const checkQuery = 'SELECT * FROM weather_data WHERE city_id = $1';
       const { rows } = await pool.query(checkQuery, [cityId]);
     
       if (rows.length > 0) {
-        // If weather data exists, update it
+      
         const updateQuery = 'UPDATE weather_data SET temperature = $1, humidity = $2, air_pressure = $3 WHERE city_id = $4';
         const updateValues = [weatherData.temperature, weatherData.humidity, weatherData.airPressure, cityId];
         await pool.query(updateQuery, updateValues);
@@ -61,8 +61,6 @@ const pool = new Pool({
 
     updateWeatherData();
     
-    // Schedule to update weather data every 5 minutes
-    //setInterval(updateWeatherData, 5 * 60 * 1000);
 
 
 const getWeatherData = async (req, res) => {
