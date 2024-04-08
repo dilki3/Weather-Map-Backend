@@ -30,8 +30,6 @@ const pool = new Pool({
   }
 });  
 
-
-
 setInterval(updateWeatherData, 5 * 60 * 1000);
 
 app.listen(PORT, async () => {

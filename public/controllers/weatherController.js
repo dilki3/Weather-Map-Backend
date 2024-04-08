@@ -42,7 +42,7 @@ const pool = new Pool({
     
       // Iterate over each city and fetch weather data
       for (const city of rows) {
-        const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${city.latitude}&lon=${city.longitude}&appid=02599dc04d81ee7325f67533d7ae2cb3&units=metric`);
+        const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${city.latitude}&lon=${city.longitude}&appid=OPENWEATHER_API_KEY&units=metric`);
         
         // Extract relevant weather data from the API response
         const weatherData = {
