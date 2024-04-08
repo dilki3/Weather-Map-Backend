@@ -22,7 +22,7 @@ const pool = new Pool({
         const updateValues = [weatherData.temperature, weatherData.humidity, weatherData.airPressure, cityId];
         await pool.query(updateQuery, updateValues);
       } else {
-        // If weather data doesn't exist, insert it
+        // If weather data doesn't exist, insert it\
         const insertQuery = 'INSERT INTO weather_data (city_id, temperature, humidity, air_pressure) VALUES ($1, $2, $3, $4)';
         const insertValues = [cityId, weatherData.temperature, weatherData.humidity, weatherData.airPressure];
         await pool.query(insertQuery, insertValues);

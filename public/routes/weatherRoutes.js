@@ -10,15 +10,15 @@ const weatherController = require('../controllers/weatherController');
  * @swagger
  * /weather:
  *   get:
- *     summary: Get weather data by city name
- *     description: Retrieve weather data (temperature, humidity, air pressure) for a specific city.
+ *     summary: Get weather data by district name
+ *     description: Retrieve weather data (temperature, humidity, air pressure) for a specific district.
  *     parameters:
  *       - in: query
- *         name: city ID
+ *         name: district
  *         schema:
  *           type: string
  *         required: true
- *         description: cities
+ *         description: Name of the district
  *     responses:
  *       200:
  *         description: Success
@@ -41,6 +41,7 @@ const weatherController = require('../controllers/weatherController');
  *       500:
  *         description: Server Error
  */
+
 
    
 

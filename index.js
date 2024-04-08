@@ -9,16 +9,17 @@ const path = require('path')
 //////////
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
-
+const { updateWeatherData } = require('./public/controllers/weatherController');
+const { setupSwaggerUI } = require('./swagger');
 const app = express();
 const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 
 app.use(express.static(path.join(__dirname + "/public")))
+const sw =  setupSwaggerUI()
 
-
-app.use('/weather-api',swaggerUi.serve, swaggerUi.setup(swaggerJSDoc));
+app.use('/weather-api',swaggerUi.serve, sw);
 
 app.use('/weather', weatherRoutes);
 
@@ -29,7 +30,7 @@ const pool = new Pool({
   }
 });  
 
-const { updateWeatherData } = require('./public/controllers/weatherController');
+
 
 setInterval(updateWeatherData, 5 * 60 * 1000);
 
